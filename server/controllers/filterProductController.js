@@ -1,6 +1,6 @@
 const Product = require('../models/productsSchema')
 
-const filter = async (req, res) => {
+const filterProducts = async (req, res) => {
   try {
     const filters = req.body.filters
 
@@ -28,13 +28,13 @@ const filter = async (req, res) => {
     whereClause += ')}'
 
     params.$where = whereClause
-
     const products = await Product.find(params)
+
     return res.status(200).json(products)
-  } catch (e) {
-    console.log(e)
+  } catch (ex) {
+    console.log(ex)
     return res.status(500).json({ message: 'Can\'t filter products' })
   }
 }
 
-module.exports = { filter }
+module.exports = { filterProducts }
