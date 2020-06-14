@@ -3,71 +3,33 @@ const Product = require('../models/productsSchema')
 const filter = async (req, res) => {
   try {
     const filters = req.body.filters
-    const { key, value, value1, operator } = filters[0]
-    // console.log(value, value1)
-    if (key === 'created_at') {
-      const params = {}
-
-      params.$where = 'function () {' +
-          // 'return ((this.created_at.date > ' + value + ') && (this.created_at.date < ' + value1 + '))' +
-          'return ((this.created_at.date.slice(0,10) > "' + value + '") && (this.created_at.date.slice(0,10) < "' + value1 + '"))' +
-      '}'
-      const products = await Product.find(params)
-      console.log(products)
-      return res.status(200).json(products)
-    }
-
-    if (key === 'stock_available') {
-      const params = {}
-
-      params.$where = 'function () {' +
-          'return this.stock.available === ' + value +
-      '}'
-
-      const products = await Product.find(params)
-      console.log(products)
-      return res.status(200).json(products)
-    }
-
-    if (key === 'brand') {
-      const params = {}
-
-      params.$where = 'function () {' +
-          'return this.brand.name.includes("' + value + '")' +
-      '}'
-      const products = await Product.find(params)
-      console.log(products)
-      return res.status(200).json(products)
-    }
 
     const params = {}
+    let whereClause = ' function () { return ( '
 
-    params.$where = 'function () {' +
-        'const offerPrice = this.price.offer_price.value;' +
-        'const regularPrice = this.price.regular_price.value;' +
-        'const discountPercentage = ((regularPrice - offerPrice) / regularPrice) * 100;' +
-        'return  (discountPercentage ' + operator + value + ')' +
-    '}'
+    for (let index = 0; index < filters.length; index++) {
+      if (index !== 0) {
+        whereClause += '&&'
+      }
+      const { key, value, operator } = filters[index]
+      // console.log(key)
+      if (key === 'discount') {
+        whereClause += '((((( this.price.regular_price.value - this.price.offer_price.value) / this.price.regular_price.value ) * 100)' + operator + value + '))'
+      } else if (key === 'brand') {
+        whereClause += '(this.brand.name.toLowerCase().includes("' + value.toLowerCase() + '"))'
+      } else if (key === 'stock_available') {
+        whereClause += '(this.stock.available === ' + value + ')'
+      } else if (key === 'created_at') {
+        const [startDate, endDate] = value
+        whereClause += '((this.created_at.date.slice(0,10) > "' + startDate + '") && (this.created_at.date.slice(0,10) < "' + endDate + '"))'
+      }
+    }
+
+    whereClause += ')}'
+
+    params.$where = whereClause
 
     const products = await Product.find(params)
-
-    // console.log(products)
-    // const filterdProducts = []
-    // products.forEach(product => {
-    //   const offerPrice = product.price.offer_price.value
-    //   const regularPrice = product.price.regular_price.value
-    //   const discountPercentage = ((regularPrice - offerPrice) / regularPrice) * 100
-    //   console.log(discountPercentage)
-    //   if (operator === '<') {
-    //     if (discountPercentage < value) filterdProducts.push(product)
-    //   } else if (operator === '>') {
-    //     if (discountPercentage > value) filterdProducts.push(product)
-    //   } else if (operator === '') {
-    //     if (discountPercentage === value) filterdProducts.push(product)
-    //   }
-    // })
-
-    // console.log(filterdProducts)
     return res.status(200).json(products)
   } catch (e) {
     console.log(e)
