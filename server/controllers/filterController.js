@@ -4,21 +4,38 @@ const filter = async (req, res) => {
   try {
     const filters = req.body.filters
     const { key, value, value1, operator } = filters[0]
-    // console.log(value, operator)
+    // console.log(value, value1)
     if (key === 'created_at') {
-      const products = await Product.find({ 'created_at.date': { $gte: value, $lte: value1 } })
+      const params = {}
+
+      params.$where = 'function () {' +
+          // 'return ((this.created_at.date > ' + value + ') && (this.created_at.date < ' + value1 + '))' +
+          'return ((this.created_at.date.slice(0,10) > "' + value + '") && (this.created_at.date.slice(0,10) < "' + value1 + '"))' +
+      '}'
+      const products = await Product.find(params)
       console.log(products)
       return res.status(200).json(products)
     }
 
     if (key === 'stock_available') {
-      const products = await Product.find({ 'stock.available': value })
+      const params = {}
+
+      params.$where = 'function () {' +
+          'return this.stock.available === ' + value +
+      '}'
+
+      const products = await Product.find(params)
       console.log(products)
       return res.status(200).json(products)
     }
 
     if (key === 'brand') {
-      const products = await Product.find({ 'brand.name': new RegExp(value, 'i') })
+      const params = {}
+
+      params.$where = 'function () {' +
+          'return this.brand.name.includes("' + value + '")' +
+      '}'
+      const products = await Product.find(params)
       console.log(products)
       return res.status(200).json(products)
     }
