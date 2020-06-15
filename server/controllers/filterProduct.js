@@ -1,10 +1,22 @@
 const Product = require('../models/productsSchema')
 
+const getProducts = async (req, res) => {
+  try {
+    const products = await Product.find({})
+    return res.status(200).json(products)
+  } catch (ex) {
+    console.log(ex)
+    return res.status(500).json({ message: 'Can\'t get products' })
+  }
+}
+
 const filterProducts = async (req, res) => {
   try {
     const filters = req.body.filters
 
     const params = {}
+
+    // dynamic where clause
     let whereClause = ' function () { return ( '
 
     for (let index = 0; index < filters.length; index++) {
@@ -28,13 +40,15 @@ const filterProducts = async (req, res) => {
     whereClause += ')}'
 
     params.$where = whereClause
-    const products = await Product.find(params)
 
-    return res.status(200).json(products)
+    // Query to DB
+    const filteredproducts = await Product.find(params)
+
+    return res.status(200).json(filteredproducts)
   } catch (ex) {
     console.log(ex)
     return res.status(500).json({ message: 'Can\'t filter products' })
   }
 }
 
-module.exports = { filterProducts }
+module.exports = { getProducts, filterProducts }
