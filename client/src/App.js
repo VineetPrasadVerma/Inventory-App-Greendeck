@@ -12,10 +12,10 @@ function App () {
     setError(true)
   }
 
-  const filters = [{ id: 0, name: 'Discount %' },
-    { id: 1, name: 'Brand' },
-    { id: 2, name: 'Available' },
-    { id: 3, name: 'Created' }
+  const filters = [{ id: 0, name: 'Discount %', type: 'numeric' },
+    { id: 1, name: 'Brand', type: 'text' },
+    { id: 2, name: 'Availability', type: 'boolean' },
+    { id: 3, name: 'AddedOn', type: 'date' }
   ]
   return (
     <div className='App container'>
