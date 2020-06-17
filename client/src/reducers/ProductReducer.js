@@ -3,8 +3,8 @@ export const productReducer = (state, action) => {
     case 'GET_PRODUCTS':
       return [...action.products]
 
-    case 'FILTER_TASK':
-      return state.filter(task => task._id !== action.task.taskId)
+    case 'FILTER_PRODUCTS':
+      return [...action.products]
 
     default:
       return state

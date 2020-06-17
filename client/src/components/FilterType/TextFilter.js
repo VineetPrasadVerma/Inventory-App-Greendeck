@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 
-const TextFilter = () => {
-  const [text, setText] = useState('')
+const TextFilter = ({ filter, text, setText }) => {
   return (
-    <div onClick={(e) => e.stopPropagation()}>
+    <div style={{ margin: '10px' }}>
+      <h4>{filter.name}</h4>
+
       <input
         type='text'
         autoFocus

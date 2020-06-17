@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-const DateFilter = () => {
-  const [startDate, setStartDate] = useState('')
-  const [endDate, setEndDate] = useState('')
+const DateFilter = ({ startDate, setStartDate, endDate, setEndDate }) => {
   return (
-    <div onClick={(e) => e.stopPropagation()}>
+    <div style={{ margin: '10px' }}>
+      <h4>Added On</h4>
       <input
         type='date' value={startDate}
         onChange={(event) => {

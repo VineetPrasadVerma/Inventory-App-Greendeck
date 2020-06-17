@@ -13,7 +13,6 @@ const getProducts = async (req, res) => {
 const filterProducts = async (req, res) => {
   try {
     const filters = req.body.filters
-
     const params = {}
 
     // dynamic where clause
