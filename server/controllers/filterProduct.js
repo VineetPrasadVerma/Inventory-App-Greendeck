@@ -6,7 +6,7 @@ const getProducts = async (req, res) => {
     return res.status(200).json(products)
   } catch (ex) {
     console.log(ex)
-    return res.status(500).json({ message: 'Can\'t get products' })
+    return res.status(500).json({ message: "Can't get products" })
   }
 }
 
@@ -26,14 +26,39 @@ const filterProducts = async (req, res) => {
       const { key, value, operator } = filters[index]
       // console.log(key)
       if (key === 'discount') {
-        whereClause += '((((( this.price.regular_price.value - this.price.offer_price.value) / this.price.regular_price.value ) * 100)' + operator + value + '))'
+        if (operator === 'between') {
+          const [number, otherNumber] = value
+          whereClause +=
+            '((((( this.price.regular_price.value - this.price.offer_price.value) / this.price.regular_price.value ) * 100)' +
+            '>' +
+            number +
+            ')) && ' +
+            '((((( this.price.regular_price.value - this.price.offer_price.value) / this.price.regular_price.value ) * 100)' +
+            '<' +
+            otherNumber +
+            '))'
+        } else {
+          whereClause +=
+            '((((( this.price.regular_price.value - this.price.offer_price.value) / this.price.regular_price.value ) * 100)' +
+            operator +
+            value +
+            '))'
+        }
       } else if (key === 'brand') {
-        whereClause += '(this.brand.name.toLowerCase().includes("' + value.toLowerCase() + '"))'
+        whereClause +=
+          '(this.brand.name.toLowerCase().includes("' +
+          value.toLowerCase() +
+          '"))'
       } else if (key === 'stock_available') {
         whereClause += '(this.stock.available === ' + value + ')'
       } else if (key === 'created_at') {
         const [startDate, endDate] = value
-        whereClause += '((this.created_at.date.slice(0,10) > "' + startDate + '") && (this.created_at.date.slice(0,10) < "' + endDate + '"))'
+        whereClause +=
+          '((this.created_at.date.slice(0,10) > "' +
+          startDate +
+          '") && (this.created_at.date.slice(0,10) < "' +
+          endDate +
+          '"))'
       }
     }
 
@@ -47,7 +72,7 @@ const filterProducts = async (req, res) => {
     return res.status(200).json(filteredproducts)
   } catch (ex) {
     console.log(ex)
-    return res.status(500).json({ message: 'Can\'t filter products' })
+    return res.status(500).json({ message: "Can't filter products" })
   }
 }
 
