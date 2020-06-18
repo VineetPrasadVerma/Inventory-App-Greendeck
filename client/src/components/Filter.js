@@ -92,6 +92,7 @@ const Filter = ({ filters, handleError }) => {
     }
   }
 
+  // reset the filters selected by user
   const handleReset = async () => {
     setNumber('')
     setOtherNumber('')
