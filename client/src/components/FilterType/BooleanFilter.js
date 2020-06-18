@@ -1,9 +1,9 @@
 import React from 'react'
 
-const BooleanFilter = ({ boolean, setBoolean }) => {
+const BooleanFilter = ({ filter, boolean, setBoolean }) => {
   return (
-    <div style={{ margin: '10px' }}>
-      <h4>Availability</h4>
+    <div>
+      <h4>{filter.name}</h4>
       <input
         type='radio'
         name='stock_available'

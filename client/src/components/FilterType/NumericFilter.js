@@ -1,18 +1,27 @@
 import React from 'react'
 
-const NumericFilter = ({ filter, number, setNumber, otherNumber, setOtherNumber, operator, setOperator }) => {
+const NumericFilter = ({
+  filter,
+  number,
+  setNumber,
+  otherNumber,
+  setOtherNumber,
+  operator,
+  setOperator
+}) => {
   return (
-    <div style={{ margin: '10px' }}>
+    <div>
       <h4>{filter.name}</h4>
       <select
-        value={operator} onChange={(event) => {
+        value={operator}
+        onChange={(event) => {
           setOperator(event.target.value)
         }}
       >
         <option value='<'>Less than</option>
         <option value='>'>Greater than</option>
-        <option value='==='>Equals</option>
-        <option value='between'>between</option>
+        <option value='=='>Equals</option>
+        <option value='between'>Between</option>
       </select>
       {operator === 'between' ? (
         <div>
@@ -20,7 +29,7 @@ const NumericFilter = ({ filter, number, setNumber, otherNumber, setOtherNumber,
             type='number'
             autoFocus
             value={number}
-            placeholder='Start Value'
+            placeholder='Min Disc. %'
             onChange={(event) => {
               setNumber(event.target.value)
             }}
@@ -29,7 +38,7 @@ const NumericFilter = ({ filter, number, setNumber, otherNumber, setOtherNumber,
             type='number'
             autoFocus
             value={otherNumber}
-            placeholder='End Value'
+            placeholder='Max Disc. %'
             onChange={(event) => {
               setOtherNumber(event.target.value)
             }}
@@ -40,12 +49,11 @@ const NumericFilter = ({ filter, number, setNumber, otherNumber, setOtherNumber,
           type='number'
           autoFocus
           value={number}
-          placeholder='Discount Range'
+          placeholder='Discount %'
           onChange={(event) => {
             setNumber(event.target.value)
           }}
         />
-
       )}
     </div>
   )

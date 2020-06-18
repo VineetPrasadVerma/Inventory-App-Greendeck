@@ -1,24 +1,69 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	color: #333;
+	margin: 0;
+	padding: 8px;
+	box-sizing: border-box;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+input, textarea {
+  width: 50%;
+	font-family: inherit;
+	font-size: inherit;
+	padding: 0.2em;	
+  margin: 0 0 0.2em 0;  
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
+
+input[type=text]{
+  width: 100%;
+}
+
+input[type=radio]{
+  width: auto;
+  margin:5px;
+}
+
+input[type=date]{
+  width: 100%
+
+}
+
+select{
+  width: 40%;
+  padding: 0.1em;	
+  margin-right: 5px;
 }
 
 .App{
-  margin: 20px;
+  margin: 30px;
+}
+
+hr{
+  border-top: 2px solid #eee;
+}
+
+#message{
+  margin: 300px auto;
+  font-size: large;
+}
+
+.button{
+  width: 40%;
+  margin: 10px;
+}
+
+#regularPrice{
+ margin-left: 5px;
+ text-decoration: line-through;
+ color: gray;
+
 }
 
 .sidebar{
   height: 100vh;
-  width: 350px;
   float: left;
   position: -webkit-sticky;
   position: sticky;
@@ -28,18 +73,13 @@ code {
 }
 
 .filter{
-  padding: 10px;
+  /* padding: 10px; */
   margin: 10px;
-  border: 1px solid black;
 }
 
 .row{
   display:flex; 
-  flex-wrap: wrap;
-}
-
-#temp{
-  margin-bottom: 10px;
+  /* flex-wrap: wrap; */
 }
 
 .thumbnail img{
@@ -51,6 +91,5 @@ code {
 }
 
 .column{
-  height: 410px;
-  /* margin-bottom: 10px; */
+  height: 480px;
 }

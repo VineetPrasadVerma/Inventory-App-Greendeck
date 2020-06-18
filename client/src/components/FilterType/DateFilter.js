@@ -1,17 +1,27 @@
 import React from 'react'
 
-const DateFilter = ({ startDate, setStartDate, endDate, setEndDate }) => {
+const DateFilter = ({
+  filter,
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate
+}) => {
   return (
-    <div style={{ margin: '10px' }}>
-      <h4>Added On</h4>
+    <div>
+      <h4>{filter.name}</h4>
       <input
-        type='date' value={startDate}
+        type='date'
+        placeholder='start Date'
+        value={startDate}
         onChange={(event) => {
           setStartDate(event.target.value)
         }}
       />
       <input
-        type='date' value={endDate}
+        type='date'
+        placeholder='End Date'
+        value={endDate}
         onChange={(event) => {
           setEndDate(event.target.value)
         }}

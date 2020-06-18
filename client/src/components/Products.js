@@ -9,12 +9,18 @@ const Products = ({ handleError }) => {
     <div className='row'>
       {products.length ? (
         <div className='container'>
-          {products.map(product => {
-            return (<ProductDetails handleError={handleError} product={product} key={product.id.oid} />)
+          {products.map((product) => {
+            return (
+              <ProductDetails
+                handleError={handleError}
+                product={product}
+                key={product.id.oid}
+              />
+            )
           })}
         </div>
       ) : (
-        <p>No Product Found</p>
+        <div id='message'>No Product Found</div>
       )}
     </div>
   )

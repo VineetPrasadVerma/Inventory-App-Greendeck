@@ -1,15 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 const TextFilter = ({ filter, text, setText }) => {
   return (
-    <div style={{ margin: '10px' }}>
+    <div>
       <h4>{filter.name}</h4>
-
       <input
         type='text'
         autoFocus
         value={text}
-        placeholder='Search brand'
+        placeholder='Brand name'
         onChange={(event) => {
           setText(event.target.value)
         }}

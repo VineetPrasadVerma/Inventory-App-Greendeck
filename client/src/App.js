@@ -14,11 +14,10 @@ function App () {
 
   return (
     <div className='App container'>
-      <ProductContextProvider handleError={message => showError(message)}>
-        <Sidebar handleError={message => showError(message)} />
-        <Products handleError={message => showError(message)} />
+      <ProductContextProvider handleError={(message) => showError(message)}>
+        <Sidebar handleError={(message) => showError(message)} />
+        <Products handleError={(message) => showError(message)} />
       </ProductContextProvider>
-
     </div>
   )
 }

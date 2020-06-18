@@ -17,12 +17,12 @@ const Filter = ({ filters, handleError }) => {
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
 
-  const requestFilters = {}
+  const selectedFilters = {}
   const handleApply = async () => {
     if (number) {
       if (operator === 'between') {
         if (otherNumber) {
-          Object.assign(requestFilters, {
+          Object.assign(selectedFilters, {
             discount: {
               key: 'discount',
               value: [number, otherNumber],
@@ -31,20 +31,20 @@ const Filter = ({ filters, handleError }) => {
           })
         }
       } else {
-        Object.assign(requestFilters, {
+        Object.assign(selectedFilters, {
           discount: { key: 'discount', value: number, operator: operator }
         })
       }
     }
 
     if (text) {
-      Object.assign(requestFilters, {
+      Object.assign(selectedFilters, {
         brand: { key: 'brand', value: text, operator: 'equals' }
       })
     }
 
     if (boolean !== '') {
-      Object.assign(requestFilters, {
+      Object.assign(selectedFilters, {
         availability: {
           key: 'stock_available',
           value: boolean,
@@ -54,7 +54,7 @@ const Filter = ({ filters, handleError }) => {
     }
 
     if (startDate && endDate) {
-      Object.assign(requestFilters, {
+      Object.assign(selectedFilters, {
         created_at: {
           key: 'created_at',
           value: [startDate, endDate],
@@ -63,7 +63,7 @@ const Filter = ({ filters, handleError }) => {
       })
     }
 
-    const filters = Object.values(requestFilters)
+    const filters = Object.values(selectedFilters)
 
     if (filters.length) {
       try {
@@ -75,14 +75,14 @@ const Filter = ({ filters, handleError }) => {
         })
         dispatch({ type: 'FILTER_PRODUCTS', products: res.data })
       } catch (err) {
-        handleError('Can\'t filter Products')
+        handleError("Can't filter Products")
       }
     } else {
       try {
         const res = await axios.get('http://localhost:5500/')
         dispatch({ type: 'GET_PRODUCTS', products: res.data })
       } catch (err) {
-        handleError('Can\'t get Products')
+        handleError("Can't get Products")
       }
     }
   }
@@ -100,7 +100,7 @@ const Filter = ({ filters, handleError }) => {
       const res = await axios.get('http://localhost:5500/')
       dispatch({ type: 'GET_PRODUCTS', products: res.data })
     } catch (err) {
-      handleError('Can\'t get Products')
+      handleError("Can't get Products")
     }
   }
 
@@ -109,49 +109,68 @@ const Filter = ({ filters, handleError }) => {
       {filters.map((filter) => {
         if (filter.type === 'numeric') {
           return (
-            <NumericFilter
-              filter={filter}
-              number={number}
-              setNumber={setNumber}
-              operator={operator}
-              otherNumber={otherNumber}
-              setOtherNumber={setOtherNumber}
-              setOperator={setOperator}
-              key={filter.id}
-            />
+            <div key={filter.id}>
+              <NumericFilter
+                filter={filter}
+                number={number}
+                setNumber={setNumber}
+                operator={operator}
+                otherNumber={otherNumber}
+                setOtherNumber={setOtherNumber}
+                setOperator={setOperator}
+              />
+              <hr />
+            </div>
           )
         } else if (filter.type === 'text') {
           return (
-            <TextFilter
-              filter={filter}
-              text={text}
-              setText={setText}
-              key={filter.id}
-            />
+            <div key={filter.id}>
+              <TextFilter
+                filter={filter}
+                text={text}
+                setText={setText}
+                key={filter.id}
+              />
+              <hr />
+            </div>
           )
         } else if (filter.type === 'boolean') {
           return (
-            <BooleanFilter
-              boolean={boolean}
-              setBoolean={setBoolean}
-              key={filter.id}
-            />
+            <div key={filter.id}>
+              <BooleanFilter
+                filter={filter}
+                boolean={boolean}
+                setBoolean={setBoolean}
+                key={filter.id}
+              />
+              <hr />
+            </div>
           )
         } else if (filter.type === 'date') {
           return (
-            <DateFilter
-              startDate={startDate}
-              setStartDate={setStartDate}
-              endDate={endDate}
-              setEndDate={setEndDate}
-              key={filter.id}
-            />
+            <div key={filter.id}>
+              <DateFilter
+                filter={filter}
+                startDate={startDate}
+                setStartDate={setStartDate}
+                endDate={endDate}
+                setEndDate={setEndDate}
+                key={filter.id}
+              />
+              <hr />
+            </div>
           )
+        } else {
+          return <></>
         }
       })}
 
-      <button onClick={handleApply}>Apply</button>
-      <button onClick={handleReset}>Reset</button>
+      <button className='btn btn-primary button' onClick={handleApply}>
+        Apply
+      </button>
+      <button className='btn btn-primary button' onClick={handleReset}>
+        Reset
+      </button>
     </div>
   )
 }
