@@ -1,5 +1,6 @@
 import React from 'react'
 
+// Generic filter - can be applied for number operations like <, > , equals, between
 const NumericFilter = ({
   filter,
   number,
@@ -11,6 +12,7 @@ const NumericFilter = ({
 }) => {
   return (
     <div>
+
       <h4>{filter.name}</h4>
       <select
         value={operator}
@@ -20,11 +22,15 @@ const NumericFilter = ({
       >
         <option value='<'>Less than</option>
         <option value='>'>Greater than</option>
-        <option value='=='>Equals</option>
+        <option value='==='>Equals</option>
         <option value='between'>Between</option>
+
       </select>
+
       {operator === 'between' ? (
+
         <div>
+
           <input
             type='number'
             autoFocus
@@ -34,6 +40,7 @@ const NumericFilter = ({
               setNumber(event.target.value)
             }}
           />
+
           <input
             type='number'
             autoFocus
@@ -43,8 +50,10 @@ const NumericFilter = ({
               setOtherNumber(event.target.value)
             }}
           />
+
         </div>
       ) : (
+
         <input
           type='number'
           autoFocus
@@ -54,7 +63,9 @@ const NumericFilter = ({
             setNumber(event.target.value)
           }}
         />
+
       )}
+
     </div>
   )
 }

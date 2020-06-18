@@ -8,6 +8,7 @@ const filterRoutes = require('./routes/filterRoutes')
 
 // connectDB().then((res) => insertData())
 connectDB()
+
 const app = express()
 
 app.use(cors())

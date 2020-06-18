@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Sidebar } from './components/Sidebar'
 import ProductContextProvider from './context/ProductContext'
 import Products from './components/Products'
+import Error from './components/Error'
 
 function App () {
   const [error, setError] = useState(false)
@@ -12,13 +13,15 @@ function App () {
     setError(true)
   }
 
-  return (
+  return !error ? (
     <div className='App container'>
       <ProductContextProvider handleError={(message) => showError(message)}>
         <Sidebar handleError={(message) => showError(message)} />
         <Products handleError={(message) => showError(message)} />
       </ProductContextProvider>
     </div>
+  ) : (
+    <Error message={message} />
   )
 }
 

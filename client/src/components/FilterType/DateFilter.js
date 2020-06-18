@@ -1,5 +1,6 @@
 import React from 'react'
 
+// Generic filter - can be applied for date.
 const DateFilter = ({
   filter,
   startDate,
@@ -9,7 +10,9 @@ const DateFilter = ({
 }) => {
   return (
     <div>
+
       <h4>{filter.name}</h4>
+
       <input
         type='date'
         placeholder='start Date'
@@ -18,6 +21,7 @@ const DateFilter = ({
           setStartDate(event.target.value)
         }}
       />
+
       <input
         type='date'
         placeholder='End Date'
@@ -26,6 +30,7 @@ const DateFilter = ({
           setEndDate(event.target.value)
         }}
       />
+
     </div>
   )
 }

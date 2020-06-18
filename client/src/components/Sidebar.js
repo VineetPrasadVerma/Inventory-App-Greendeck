@@ -2,6 +2,7 @@ import React from 'react'
 import Filter from './Filter'
 
 export const Sidebar = ({ handleError }) => {
+  // Filters array for displaying the filter on sidebar
   const filters = [
     { id: 0, name: 'Discount %', type: 'numeric' },
     { id: 1, name: 'Brand', type: 'text' },

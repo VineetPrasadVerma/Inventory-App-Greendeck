@@ -1,5 +1,6 @@
 const Product = require('../models/productsSchema')
 
+// Get Products from DB
 const getProducts = async (req, res) => {
   try {
     const products = await Product.find({})
@@ -10,6 +11,7 @@ const getProducts = async (req, res) => {
   }
 }
 
+// Filter Products based on filters applied
 const filterProducts = async (req, res) => {
   try {
     const filters = req.body.filters
@@ -25,20 +27,24 @@ const filterProducts = async (req, res) => {
       const { key, value, operator } = filters[index]
       // console.log(key)
       if (key === 'discount') {
+        // Discount Percentage formula
+        const discountPercentage =
+          '((((( this.price.regular_price.value - this.price.offer_price.value) / this.price.regular_price.value ) * 100)'
+
         if (operator === 'between') {
           const [number, otherNumber] = value
           whereClause +=
-            '((((( this.price.regular_price.value - this.price.offer_price.value) / this.price.regular_price.value ) * 100)' +
+            discountPercentage +
             '>' +
             number +
             ')) && ' +
-            '((((( this.price.regular_price.value - this.price.offer_price.value) / this.price.regular_price.value ) * 100)' +
+            discountPercentage +
             '<' +
             otherNumber +
             '))'
         } else {
           whereClause +=
-            '((((( this.price.regular_price.value - this.price.offer_price.value) / this.price.regular_price.value ) * 100)' +
+            discountPercentage +
             operator +
             value +
             '))'
@@ -52,6 +58,7 @@ const filterProducts = async (req, res) => {
         whereClause += '(this.stock.available === ' + value + ')'
       } else if (key === 'created_at') {
         const [startDate, endDate] = value
+
         whereClause +=
           '((this.created_at.date.slice(0,10) > "' +
           startDate +

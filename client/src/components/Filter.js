@@ -7,8 +7,10 @@ import DateFilter from './FilterType/DateFilter'
 import { ProductContext } from '../context/ProductContext'
 
 const Filter = ({ filters, handleError }) => {
+  // consuming the product context
   const { dispatch } = useContext(ProductContext)
 
+  // States for each filter
   const [number, setNumber] = useState('')
   const [otherNumber, setOtherNumber] = useState('')
   const [operator, setOperator] = useState('<')
@@ -17,7 +19,9 @@ const Filter = ({ filters, handleError }) => {
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
 
+  // Object to store the filters selected by user
   const selectedFilters = {}
+
   const handleApply = async () => {
     if (number) {
       if (operator === 'between') {
@@ -63,6 +67,7 @@ const Filter = ({ filters, handleError }) => {
       })
     }
 
+    // filters have request body
     const filters = Object.values(selectedFilters)
 
     if (filters.length) {
@@ -106,10 +111,12 @@ const Filter = ({ filters, handleError }) => {
 
   return (
     <div className='filter'>
+
       {filters.map((filter) => {
         if (filter.type === 'numeric') {
           return (
             <div key={filter.id}>
+
               <NumericFilter
                 filter={filter}
                 number={number}
@@ -120,11 +127,13 @@ const Filter = ({ filters, handleError }) => {
                 setOperator={setOperator}
               />
               <hr />
+
             </div>
           )
         } else if (filter.type === 'text') {
           return (
             <div key={filter.id}>
+
               <TextFilter
                 filter={filter}
                 text={text}
@@ -132,11 +141,13 @@ const Filter = ({ filters, handleError }) => {
                 key={filter.id}
               />
               <hr />
+
             </div>
           )
         } else if (filter.type === 'boolean') {
           return (
             <div key={filter.id}>
+
               <BooleanFilter
                 filter={filter}
                 boolean={boolean}
@@ -144,11 +155,13 @@ const Filter = ({ filters, handleError }) => {
                 key={filter.id}
               />
               <hr />
+
             </div>
           )
         } else if (filter.type === 'date') {
           return (
             <div key={filter.id}>
+
               <DateFilter
                 filter={filter}
                 startDate={startDate}
@@ -158,6 +171,7 @@ const Filter = ({ filters, handleError }) => {
                 key={filter.id}
               />
               <hr />
+
             </div>
           )
         } else {

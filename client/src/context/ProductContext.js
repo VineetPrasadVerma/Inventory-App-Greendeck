@@ -8,12 +8,13 @@ const ProductContextProvider = (props) => {
   const [products, dispatch] = useReducer(productReducer, [])
 
   useEffect(() => {
+    // Get Products from DB and set in to state
     const fetchProducts = async () => {
       try {
         const res = await axios.get('http://localhost:5500/')
         dispatch({ type: 'GET_PRODUCTS', products: res.data })
       } catch (err) {
-        props.handleError('Can\'t get Products')
+        props.handleError("Can't get Products")
       }
     }
 

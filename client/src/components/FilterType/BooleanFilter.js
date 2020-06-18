@@ -1,9 +1,12 @@
 import React from 'react'
 
+// Generic filter - can be applied for boolean values
 const BooleanFilter = ({ filter, boolean, setBoolean }) => {
   return (
     <div>
+
       <h4>{filter.name}</h4>
+
       <input
         type='radio'
         name='stock_available'
@@ -11,7 +14,9 @@ const BooleanFilter = ({ filter, boolean, setBoolean }) => {
         onClick={(e) => setBoolean(true)}
       />{' '}
       In Stock
+
       <div />
+
       <input
         type='radio'
         name='stock_available'
@@ -19,7 +24,9 @@ const BooleanFilter = ({ filter, boolean, setBoolean }) => {
         onClick={(e) => setBoolean(false)}
       />{' '}
       Out of stock
+
       <div />
+
       <input
         type='radio'
         name='stock_available'
@@ -27,6 +34,7 @@ const BooleanFilter = ({ filter, boolean, setBoolean }) => {
         onChange={(e) => setBoolean('')}
       />{' '}
       All
+
     </div>
   )
 }

@@ -2,6 +2,7 @@ const ndjson = require('ndjson')
 const fs = require('fs')
 const Product = require('./models/productsSchema')
 
+// insert data to DB
 const insertData = async () => {
   fs.createReadStream('data.txt')
     .pipe(ndjson.parse())

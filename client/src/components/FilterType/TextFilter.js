@@ -1,5 +1,6 @@
 import React from 'react'
 
+// Generic filter - can be applied for text searching
 const TextFilter = ({ filter, text, setText }) => {
   return (
     <div>
