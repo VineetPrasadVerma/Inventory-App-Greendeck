@@ -74,7 +74,7 @@ const Filter = ({ filters, handleError }) => {
       try {
         const res = await axios({
           method: 'POST',
-          url: '/filter',
+          url: 'products/filter',
           data: { filters },
           headers: { 'Content-type': 'application/json' }
         })
@@ -84,7 +84,7 @@ const Filter = ({ filters, handleError }) => {
       }
     } else {
       try {
-        const res = await axios.get('/')
+        const res = await axios.get('products/')
         dispatch({ type: 'GET_PRODUCTS', products: res.data })
       } catch (err) {
         handleError("Can't get Products")
@@ -103,7 +103,7 @@ const Filter = ({ filters, handleError }) => {
     setEndDate('')
 
     try {
-      const res = await axios.get('/')
+      const res = await axios.get('products/')
       dispatch({ type: 'GET_PRODUCTS', products: res.data })
     } catch (err) {
       handleError("Can't get Products")
