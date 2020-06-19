@@ -5,7 +5,7 @@ const getProducts = async (req, res) => {
   try {
     console.log('DB here')
     const products = await Product.find()
-    console.log('here')
+    console.log('There')
     return res.status(200).json(products)
   } catch (ex) {
     console.log(ex)
