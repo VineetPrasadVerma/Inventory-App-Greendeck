@@ -77,7 +77,15 @@ const filterProducts = async (req, res) => {
     params.$where = whereClause
 
     // Query to DB
-    const filteredproducts = await Product.find(params)
+    const filteredproducts = await Product.find(
+      {
+        id: 1,
+        brand: 1,
+        price: 1,
+        price_positioning_text: 1
+      },
+      params
+    )
 
     return res.status(200).json(filteredproducts)
   } catch (ex) {
