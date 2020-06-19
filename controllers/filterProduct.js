@@ -3,12 +3,8 @@ const Product = require('../models/productsSchema')
 // Get Products from DB
 const getProducts = async (req, res) => {
   try {
-    console.log('DB here')
     const products = await Product.find()
-    console.log('There')
-    console.log(products.length)
-    console.log('There vinet')
-    return res.status(200).json(products)
+    return res.status(200).json(products[0])
   } catch (ex) {
     console.log(ex)
     return res.status(500).json({ message: "Can't get products" })
