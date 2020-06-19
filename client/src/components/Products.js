@@ -5,7 +5,7 @@ import ProductDetails from './ProductDetails'
 const Products = ({ handleError }) => {
   // consuming the product context
   const { products } = useContext(ProductContext)
-  console.log(products)
+  // console.log(products)
 
   return (
     <div className='row'>

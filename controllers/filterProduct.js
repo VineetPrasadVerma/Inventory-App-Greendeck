@@ -9,7 +9,6 @@ const getProducts = async (req, res) => {
         id: 1,
         brand: 1,
         price: 1,
-        'media.standard[0].url': 1,
         price_positioning_text: 1
       }
     )
