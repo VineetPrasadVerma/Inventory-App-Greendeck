@@ -74,7 +74,7 @@ const Filter = ({ filters, handleError }) => {
       try {
         const res = await axios({
           method: 'POST',
-          url: 'http://localhost:5500/filter',
+          url: '/filter',
           data: { filters },
           headers: { 'Content-type': 'application/json' }
         })
