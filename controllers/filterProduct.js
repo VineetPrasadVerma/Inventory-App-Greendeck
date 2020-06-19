@@ -4,7 +4,7 @@ const Product = require('../models/productsSchema')
 const getProducts = async (req, res) => {
   try {
     const products = await Product.find()
-    return res.status(200).json(products[0])
+    return res.status(200).json(products.slice(0, 10))
   } catch (ex) {
     console.log(ex)
     return res.status(500).json({ message: "Can't get products" })
