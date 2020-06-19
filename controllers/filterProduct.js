@@ -3,8 +3,16 @@ const Product = require('../models/productsSchema')
 // Get Products from DB
 const getProducts = async (req, res) => {
   try {
-    const products = await Product.find()
-    return res.status(200).json(products.slice(0, 10))
+    const products = await Product.find(
+      {},
+      {
+        id: 1,
+        brand: 1,
+        price: 1,
+        price_positioning_text: 1
+      }
+    )
+    return res.status(200).json(products)
   } catch (ex) {
     console.log(ex)
     return res.status(500).json({ message: "Can't get products" })
@@ -43,11 +51,7 @@ const filterProducts = async (req, res) => {
             otherNumber +
             '))'
         } else {
-          whereClause +=
-            discountPercentage +
-            operator +
-            value +
-            '))'
+          whereClause += discountPercentage + operator + value + '))'
         }
       } else if (key === 'brand') {
         whereClause +=
