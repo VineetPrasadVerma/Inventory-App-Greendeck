@@ -5,12 +5,16 @@ import ProductDetails from './ProductDetails'
 const Products = ({ handleError }) => {
   // consuming the product context
   const { products } = useContext(ProductContext)
+  console.log(products)
 
   return (
     <div className='row'>
-      {products.length ? (
+      {products === null ? (
+        <div id='message'>Loading...</div>
+      ) : products.length === 0 ? (
+        <div id='message'>No Product Found</div>
+      ) : (
         <div className='container'>
-
           {products.map((product) => {
             return (
               <ProductDetails
@@ -20,10 +24,7 @@ const Products = ({ handleError }) => {
               />
             )
           })}
-
         </div>
-      ) : (
-        <div id='message'>No Product Found</div>
       )}
     </div>
   )

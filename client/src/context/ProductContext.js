@@ -5,7 +5,7 @@ import axios from 'axios'
 export const ProductContext = createContext()
 
 const ProductContextProvider = (props) => {
-  const [products, dispatch] = useReducer(productReducer, [])
+  const [products, dispatch] = useReducer(productReducer, null)
 
   useEffect(() => {
     // Get Products from DB and set in to state
