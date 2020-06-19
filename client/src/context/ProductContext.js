@@ -11,7 +11,7 @@ const ProductContextProvider = (props) => {
     // Get Products from DB and set in to state
     const fetchProducts = async () => {
       try {
-        const res = await axios.get('http://localhost:5500/')
+        const res = await axios.get('products/')
         dispatch({ type: 'GET_PRODUCTS', products: res.data })
       } catch (err) {
         props.handleError("Can't get Products")
