@@ -10,7 +10,7 @@ const getProducts = async (req, res) => {
         brand: 1,
         price: 1,
         price_positioning_text: 1,
-        'media.standard[0]': 1
+        'media.standard': 1
       }
     )
 
