@@ -14,7 +14,7 @@ const getProducts = async (req, res) => {
       }
     )
 
-    console.log(products)
+    console.log(products[0])
     return res.status(200).json(products)
   } catch (ex) {
     console.log(ex)
