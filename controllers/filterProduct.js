@@ -9,7 +9,8 @@ const getProducts = async (req, res) => {
         id: 1,
         brand: 1,
         price: 1,
-        price_positioning_text: 1
+        price_positioning_text: 1,
+        media: { $arrayElemAt: ['$media.standard', 0] }
       }
     )
     return res.status(200).json(products)
