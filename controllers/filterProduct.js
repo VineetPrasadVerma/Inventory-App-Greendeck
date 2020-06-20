@@ -13,6 +13,8 @@ const getProducts = async (req, res) => {
         'media.standard[0]': 1
       }
     )
+
+    console.log(products)
     return res.status(200).json(products)
   } catch (ex) {
     console.log(ex)
