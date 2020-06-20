@@ -5,3 +5,5 @@
     <img src="/screenshots/inventoryapp_2.png" width="400px"</img> 
     <img src="/screenshots/inventoryapp_1.png" width="400px"</img> 
   </div> 
+
+  ### See the app in action [here](https://captainvineet-inventory.herokuapp.com/)
