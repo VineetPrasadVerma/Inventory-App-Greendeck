@@ -1,5 +1,6 @@
 import React from 'react'
 
+// Each Product Details
 const ProductDetails = ({ product }) => {
   return (
     <div className='column col-md-4 col-sm-6'>

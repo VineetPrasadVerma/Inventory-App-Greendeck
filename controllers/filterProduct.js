@@ -14,7 +14,6 @@ const getProducts = async (req, res) => {
       }
     )
 
-    // console.log(products[0])
     return res.status(200).json(products)
   } catch (ex) {
     console.log(ex)
@@ -36,7 +35,7 @@ const filterProducts = async (req, res) => {
         whereClause += '&&'
       }
       const { key, value, operator } = filters[index]
-      // console.log(key)
+
       if (key === 'discount') {
         // Discount Percentage formula
         const discountPercentage =

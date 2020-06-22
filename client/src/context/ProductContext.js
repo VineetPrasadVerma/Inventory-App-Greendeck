@@ -21,7 +21,6 @@ const ProductContextProvider = (props) => {
     fetchProducts()
   }, [])
 
-  // console.log(products)
   return (
     <ProductContext.Provider value={{ products, dispatch }}>
       {props.children}

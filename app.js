@@ -5,9 +5,8 @@ const cors = require('cors')
 const path = require('path')
 const connectDB = require('./config/connection')
 const filterRoutes = require('./routes/filterRoutes')
-// const insertData = require('./seedDB')
 
-// connectDB().then((res) => insertData())
+// Database Connection
 connectDB()
 
 const app = express()
